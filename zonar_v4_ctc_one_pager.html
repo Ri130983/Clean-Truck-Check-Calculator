@@ -1,0 +1,448 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .op-wrap {
+    font-family: 'Roboto', sans-serif;
+    background: #FFFFFF;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .op-header {
+    background: #212121;
+    padding: 1.25rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .op-header img { height: 36px; width: auto; object-fit: contain; }
+
+  .op-header-badge {
+    background: #005bf8;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+
+  .op-accent { height: 3px; background: linear-gradient(90deg, #8400FF 0%, #005bf8 50%, #00aeef 100%); }
+
+  .op-hero {
+    background: #212121;
+    padding: 2rem 1.75rem 1.75rem;
+    border-bottom: 1px solid #333;
+  }
+
+  .op-hero-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #00aeef;
+    margin-bottom: 0.6rem;
+  }
+
+  .op-hero h1 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    max-width: 520px;
+  }
+
+  .op-hero h1 span { color: #FFD800; }
+
+  .op-hero p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: 560px;
+  }
+
+  .op-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid #333;
+  }
+
+  .op-stat {
+    padding: 1.1rem 1.75rem;
+    border-right: 1px solid #333;
+    background: #212121;
+  }
+
+  .op-stat:last-child { border-right: none; }
+
+  .op-stat-val {
+    font-size: 24px;
+    font-weight: 900;
+    color: #FFD800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .op-stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .op-body { padding: 1.5rem 1.75rem; background: #FFFFFF; }
+
+  .op-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8400FF;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .op-section-label::after { content: ''; flex: 1; height: 1px; background: #F4F4F4; }
+
+  .op-how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .op-step {
+    background: #F4F4F4;
+    border-radius: 6px;
+    padding: 1rem;
+    position: relative;
+  }
+
+  .op-step-num {
+    font-size: 11px;
+    font-weight: 900;
+    color: #005bf8;
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .op-step-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+
+  .op-step-body {
+    font-size: 11px;
+    color: #666666;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .op-step-bar {
+    height: 3px;
+    border-radius: 0;
+    margin-bottom: 10px;
+    border-radius: 2px;
+  }
+
+  .op-divider { height: 1px; background: #F4F4F4; margin: 1.25rem 0; }
+
+  .op-compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .op-compare-card {
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+    border: 1px solid #e0e0e0;
+  }
+
+  .op-compare-card.manual { background: #FFFFFF; }
+  .op-compare-card.zonar { background: #212121; border-color: #212121; }
+
+  .op-compare-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .op-compare-card.manual .op-compare-title { color: #666666; }
+  .op-compare-card.zonar .op-compare-title { color: #00aeef; border-bottom-color: #333; }
+
+  .op-compare-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 7px;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .op-compare-item:last-child { margin-bottom: 0; }
+
+  .op-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .op-compare-card.manual .op-compare-item { color: #666666; }
+  .op-compare-card.manual .op-dot { background: #D32F2F; }
+  .op-compare-card.zonar .op-compare-item { color: rgba(255,255,255,0.75); }
+  .op-compare-card.zonar .op-dot { background: #66ae00; }
+
+  .op-cert-banner {
+    background: #F4F4F4;
+    border-left: 3px solid #8400FF;
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .op-cert-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 4px;
+  }
+
+  .op-cert-body {
+    font-size: 11px;
+    color: #666666;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .op-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .op-price-card {
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    padding: 0.9rem 1rem;
+    background: #FFFFFF;
+  }
+
+  .op-price-card.featured {
+    border-color: #005bf8;
+    border-width: 2px;
+  }
+
+  .op-price-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: #005bf8;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .op-price-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 4px;
+  }
+
+  .op-price-val {
+    font-size: 18px;
+    font-weight: 900;
+    color: #005bf8;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .op-price-sub {
+    font-size: 10px;
+    color: #666666;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-top: 4px;
+  }
+
+  .op-footer {
+    background: #212121;
+    padding: 1rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .op-footer-left { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .op-footer-left strong { color: #FFFFFF; font-weight: 700; }
+
+  .op-footer-cta {
+    background: #005bf8;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    padding: 9px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .op-footer-cta:hover { background: #0049c9; }
+
+  @media (max-width: 520px) {
+    .op-how-grid { grid-template-columns: 1fr; }
+    .op-compare-grid { grid-template-columns: 1fr; }
+    .op-pricing-grid { grid-template-columns: 1fr; }
+    .op-stats-row { grid-template-columns: 1fr; }
+    .op-stat { border-right: none; border-bottom: 1px solid #333; }
+  }
+</style>
+
+<h2 style="position:absolute;left:-9999px;">Zonar V4 CARB Clean Truck Check — product one-pager</h2>
+
+<div class="op-wrap">
+
+  <div class="op-header">
+    <img src="https://www.zonar.com/hs-fs/hubfs/Zonar_Theme_2026/Images/zonar-header-logo-rev.webp?width=300&height=92&name=zonar-header-logo-rev.webp" alt="Zonar">
+    <div class="op-header-badge">Product Overview</div>
+  </div>
+  <div class="op-accent"></div>
+
+  <div class="op-hero">
+    <div class="op-hero-eyebrow">V4 Automated Emissions Compliance</div>
+    <h1>Stop scheduling tests.<br><span>Start automating compliance.</span></h1>
+    <p>Zonar's CARB-certified V4 device captures and submits Clean Truck Check data automatically during normal vehicle operation — no shop visits, no downtime, no manual coordination.</p>
+  </div>
+
+  <div class="op-stats-row">
+    <div class="op-stat">
+      <div class="op-stat-val">$0</div>
+      <div class="op-stat-label">In-person testing cost with V4 automation</div>
+    </div>
+    <div class="op-stat">
+      <div class="op-stat-val">4x</div>
+      <div class="op-stat-label">Annual tests required starting Oct 2027</div>
+    </div>
+    <div class="op-stat">
+      <div class="op-stat-val">$10K</div>
+      <div class="op-stat-label">Max daily fine per vehicle for non-compliance</div>
+    </div>
+  </div>
+
+  <div class="op-body">
+
+    <div class="op-section-label">How it works</div>
+
+    <div class="op-how-grid">
+      <div class="op-step">
+        <div class="op-step-bar" style="background:#00aeef;"></div>
+        <div class="op-step-num">01 — Install</div>
+        <div class="op-step-title">V4 connects to the OBD port</div>
+        <div class="op-step-body">The V4 device installs directly on the vehicle and connects to the OBD system. OEM-installed hardware on compatible vehicles requires no additional installation.</div>
+      </div>
+      <div class="op-step">
+        <div class="op-step-bar" style="background:#8400FF;"></div>
+        <div class="op-step-num">02 — Collect</div>
+        <div class="op-step-title">Emissions data captures continuously</div>
+        <div class="op-step-body">During every route, the V4 monitors engine and emissions data in the background. Issues surface during normal operation — not on test day.</div>
+      </div>
+      <div class="op-step">
+        <div class="op-step-bar" style="background:#66ae00;"></div>
+        <div class="op-step-num">03 — Submit</div>
+        <div class="op-step-title">Auto-submits to CARB on day one</div>
+        <div class="op-step-body">At the start of each 90-day testing window, compliant data is submitted to CARB automatically. No action required from your team.</div>
+      </div>
+    </div>
+
+    <div class="op-divider"></div>
+    <div class="op-section-label">Manual vs. automated compliance</div>
+
+    <div class="op-compare-grid">
+      <div class="op-compare-card manual">
+        <div class="op-compare-title">Manual process</div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Schedule each vehicle for in-person testing (up to $300/test)</span></div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Pull vehicles out of service, absorbing downtime</span></div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Coordinate across maintenance, dispatch, and operations</span></div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Repeat entire sequence if vehicle fails — under deadline pressure</span></div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Scales to 4x/year in 2027 — manual overhead multiplies</span></div>
+      </div>
+      <div class="op-compare-card zonar">
+        <div class="op-compare-title">Zonar V4 automated</div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Data collected continuously during normal vehicle operation</span></div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Vehicles stay in service — zero testing downtime</span></div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Auto-submitted to CARB — no scheduling or coordination</span></div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Issues surface early, giving time to resolve before deadlines</span></div>
+        <div class="op-compare-item"><div class="op-dot"></div><span>Quarterly testing in 2027 looks exactly the same as today</span></div>
+      </div>
+    </div>
+
+    <div class="op-cert-banner">
+      <div class="op-cert-title">First-to-market CARB certification — and the only hardwired approval</div>
+      <div class="op-cert-body">Zonar was the first telematics provider to receive a CARB executive order for continuously connected remote OBD testing. Zonar is also the first company certified for CTC compliance through OEM-installed vehicle hardware, and the only provider whose executive order explicitly permits compliance through a hardwired vehicle harness — not just a direct OBD port connection.</div>
+    </div>
+
+    <div class="op-divider"></div>
+    <div class="op-section-label">Pricing options</div>
+
+    <div class="op-pricing-grid">
+      <div class="op-price-card featured">
+        <div class="op-price-badge">Most popular</div>
+        <div class="op-price-name">Emissions Check Add-on</div>
+        <div class="op-price-val">$3</div>
+        <div class="op-price-sub">per asset / month<br>Added to existing Zonar subscription</div>
+      </div>
+      <div class="op-price-card">
+        <div class="op-price-name">Standalone</div>
+        <div class="op-price-val">$25</div>
+        <div class="op-price-sub">per asset / month<br>Emissions Check as a standalone service</div>
+      </div>
+      <div class="op-price-card">
+        <div class="op-price-name">V4 Hardware</div>
+        <div class="op-price-val">$200</div>
+        <div class="op-price-sub">per device (purchase)<br>Or lease for $7/asset/month — no upfront cost</div>
+      </div>
+    </div>
+
+    <div style="font-size:10px; color:#666; font-style:italic; font-weight:300; line-height:1.6; margin-bottom:1.25rem;">CARB annual compliance fee of $32.13/vehicle applies separately. Non-compliance penalties up to $10,000/vehicle/day. Tampering violations up to $37,500. Quarterly testing requirement takes effect October 2027 for OBD-equipped vehicles.</div>
+
+  </div>
+
+  <div class="op-footer">
+    <div class="op-footer-left">
+      <strong>Ready to automate your fleet's CARB compliance?</strong><br>
+      zonarsystems.com &nbsp;·&nbsp; (877) 843-3847
+    </div>
+    <button class="op-footer-cta" onclick="sendPrompt('I want to talk to a Zonar consultant about V4 CARB compliance for my fleet.')">Talk to a consultant ↗</button>
+  </div>
+
+</div>
