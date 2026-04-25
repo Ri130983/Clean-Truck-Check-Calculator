@@ -1,10 +1,26 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zonar CARB Clean Truck Check ROI Calculator</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .op-wrap {
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #F4F4F4;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+
+  .z-outer {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .z-wrap {
     font-family: 'Roboto', sans-serif;
     background: #FFFFFF;
     border: 1px solid #e0e0e0;
@@ -12,97 +28,38 @@
     overflow: hidden;
   }
 
-  .op-header {
+  .z-header {
     background: #212121;
-    padding: 1.25rem 1.75rem;
+    padding: 1.1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
   }
 
-  .op-header img { height: 36px; width: auto; object-fit: contain; }
+  .z-header img { height: 38px; width: auto; object-fit: contain; display: block; }
 
-  .op-header-badge {
-    background: #005bf8;
-    color: #FFFFFF;
-    font-size: 10px;
+  .z-header-title { text-align: right; }
+  .z-header-title h1 {
+    font-size: 15px;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 20px;
-  }
-
-  .op-accent { height: 3px; background: linear-gradient(90deg, #8400FF 0%, #005bf8 50%, #00aeef 100%); }
-
-  .op-hero {
-    background: #212121;
-    padding: 2rem 1.75rem 1.75rem;
-    border-bottom: 1px solid #333;
-  }
-
-  .op-hero-eyebrow {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #00aeef;
-    margin-bottom: 0.6rem;
-  }
-
-  .op-hero h1 {
-    font-size: 22px;
-    font-weight: 900;
     color: #FFFFFF;
-    line-height: 1.15;
-    margin-bottom: 0.75rem;
-    max-width: 520px;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
   }
-
-  .op-hero h1 span { color: #FFD800; }
-
-  .op-hero p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.6;
+  .z-header-title p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 3px;
     font-weight: 400;
-    max-width: 560px;
   }
 
-  .op-stats-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid #333;
-  }
+  .z-accent-bar { height: 3px; background: linear-gradient(90deg, #8400FF 0%, #005bf8 50%, #00aeef 100%); }
 
-  .op-stat {
-    padding: 1.1rem 1.75rem;
-    border-right: 1px solid #333;
-    background: #212121;
-  }
+  .z-body { padding: 1.75rem 2rem; }
 
-  .op-stat:last-child { border-right: none; }
-
-  .op-stat-val {
-    font-size: 24px;
-    font-weight: 900;
-    color: #FFD800;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .op-stat-label {
+  .z-section-label {
     font-size: 11px;
-    color: rgba(255,255,255,0.55);
-    font-weight: 400;
-    line-height: 1.4;
-  }
-
-  .op-body { padding: 1.5rem 1.75rem; background: #FFFFFF; }
-
-  .op-section-label {
-    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -112,337 +69,345 @@
     align-items: center;
     gap: 8px;
   }
-  .op-section-label::after { content: ''; flex: 1; height: 1px; background: #F4F4F4; }
+  .z-section-label::after { content: ''; flex: 1; height: 1px; background: #F4F4F4; }
 
-  .op-how-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 1.5rem;
-  }
-
-  .op-step {
-    background: #F4F4F4;
-    border-radius: 6px;
-    padding: 1rem;
-    position: relative;
-  }
-
-  .op-step-num {
-    font-size: 11px;
-    font-weight: 900;
-    color: #005bf8;
-    margin-bottom: 6px;
-    letter-spacing: 0.05em;
-  }
-
-  .op-step-title {
-    font-size: 12px;
-    font-weight: 700;
-    color: #212121;
-    margin-bottom: 5px;
-    line-height: 1.3;
-  }
-
-  .op-step-body {
-    font-size: 11px;
-    color: #666666;
-    line-height: 1.5;
-    font-weight: 400;
-  }
-
-  .op-step-bar {
-    height: 3px;
-    border-radius: 0;
-    margin-bottom: 10px;
-    border-radius: 2px;
-  }
-
-  .op-divider { height: 1px; background: #F4F4F4; margin: 1.25rem 0; }
-
-  .op-compare-grid {
+  .inputs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 1.1rem 2.5rem;
     margin-bottom: 1.5rem;
   }
 
-  .op-compare-card {
-    border-radius: 6px;
-    padding: 1rem 1.1rem;
-    border: 1px solid #e0e0e0;
-  }
+  .input-row { display: flex; flex-direction: column; gap: 6px; }
+  .input-row label { font-size: 13px; color: #666666; font-weight: 500; }
+  .input-inner { display: flex; align-items: center; gap: 12px; }
+  .input-inner input[type=range] { flex: 1; accent-color: #005bf8; height: 4px; }
+  .val-badge { font-size: 13px; font-weight: 700; color: #005bf8; min-width: 62px; text-align: right; }
 
-  .op-compare-card.manual { background: #FFFFFF; }
-  .op-compare-card.zonar { background: #212121; border-color: #212121; }
+  .z-divider { height: 1px; background: #F4F4F4; margin: 1.4rem 0; }
 
-  .op-compare-title {
-    font-size: 11px;
+  .toggle-group { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+
+  .z-toggle {
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #e0e0e0;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1.5px solid #e0e0e0;
+    background: #FFFFFF;
+    color: #666666;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.15s;
   }
+  .z-toggle.active-blue { border-color: #005bf8; color: #005bf8; background: rgba(0,91,248,0.06); }
+  .z-toggle.active-purple { border-color: #8400FF; color: #8400FF; background: rgba(132,0,255,0.06); }
 
-  .op-compare-card.manual .op-compare-title { color: #666666; }
-  .op-compare-card.zonar .op-compare-title { color: #00aeef; border-bottom-color: #333; }
-
-  .op-compare-item {
+  .lease-callout {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 7px;
-    font-size: 11px;
-    line-height: 1.4;
-  }
-
-  .op-compare-item:last-child { margin-bottom: 0; }
-
-  .op-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 3px;
-  }
-
-  .op-compare-card.manual .op-compare-item { color: #666666; }
-  .op-compare-card.manual .op-dot { background: #D32F2F; }
-  .op-compare-card.zonar .op-compare-item { color: rgba(255,255,255,0.75); }
-  .op-compare-card.zonar .op-dot { background: #66ae00; }
-
-  .op-cert-banner {
+    gap: 10px;
     background: #F4F4F4;
-    border-left: 3px solid #8400FF;
+    border-left: 3px solid #FFD800;
     border-radius: 0 6px 6px 0;
-    padding: 0.9rem 1.1rem;
-    margin-bottom: 1.5rem;
+    padding: 10px 14px;
+    margin-bottom: 1.4rem;
   }
+  .lease-callout-text { font-size: 12px; color: #212121; line-height: 1.5; font-weight: 400; }
+  .lease-callout-text strong { font-weight: 700; }
 
-  .op-cert-title {
-    font-size: 11px;
-    font-weight: 700;
-    color: #212121;
-    margin-bottom: 4px;
-  }
+  .z-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1.4rem; }
+  .z-table thead th { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #666666; padding: 7px 0; border-bottom: 2px solid #F4F4F4; text-align: left; }
+  .z-table thead th:not(:first-child) { text-align: right; }
+  .z-table thead th.th-zonar { color: #005bf8; }
+  .z-table tbody td { padding: 9px 0; border-bottom: 1px solid #F4F4F4; color: #212121; font-weight: 400; }
+  .z-table tbody td:not(:first-child) { text-align: right; }
+  .z-table tbody td.row-cat { color: #666666; font-size: 12px; }
+  .z-table tr.z-total td { font-weight: 700; font-size: 14px; padding-top: 13px; border-bottom: none; color: #212121; }
+  .z-table tr.z-total td.td-zonar { color: #005bf8; }
+  .z-table tr.z-total td.td-manual { color: #666666; }
 
-  .op-cert-body {
-    font-size: 11px;
-    color: #666666;
-    line-height: 1.5;
-    font-weight: 400;
-  }
-
-  .op-pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 1.5rem;
-  }
-
-  .op-price-card {
-    border-radius: 6px;
-    border: 1px solid #e0e0e0;
-    padding: 0.9rem 1rem;
-    background: #FFFFFF;
-  }
-
-  .op-price-card.featured {
-    border-color: #005bf8;
-    border-width: 2px;
-  }
-
-  .op-price-badge {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #FFFFFF;
-    background: #005bf8;
-    padding: 2px 8px;
-    border-radius: 10px;
-    display: inline-block;
-    margin-bottom: 6px;
-  }
-
-  .op-price-name {
-    font-size: 11px;
-    font-weight: 700;
-    color: #212121;
-    margin-bottom: 4px;
-  }
-
-  .op-price-val {
-    font-size: 18px;
-    font-weight: 900;
-    color: #005bf8;
-    line-height: 1;
-    margin-bottom: 2px;
-  }
-
-  .op-price-sub {
-    font-size: 10px;
-    color: #666666;
-    font-weight: 400;
-    line-height: 1.4;
-    margin-top: 4px;
-  }
-
-  .op-footer {
+  .savings-banner {
     background: #212121;
-    padding: 1rem 1.75rem;
+    border-radius: 6px;
+    padding: 1.1rem 1.4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     flex-wrap: wrap;
+    margin-bottom: 1.4rem;
   }
+  .sb-label { font-size: 12px; font-weight: 700; color: #FFD800; letter-spacing: 0.06em; text-transform: uppercase; }
+  .sb-note { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 3px; font-weight: 300; }
+  .sb-val { font-size: 30px; font-weight: 900; color: #FFFFFF; letter-spacing: -0.01em; }
 
-  .op-footer-left { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 300; }
-  .op-footer-left strong { color: #FFFFFF; font-weight: 700; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.4rem; }
+  .z-metric { background: #F4F4F4; border-radius: 6px; padding: 0.9rem 1rem; border-top: 3px solid transparent; }
+  .z-metric.m-savings { border-top-color: #66ae00; }
+  .z-metric.m-hours { border-top-color: #00aeef; }
+  .z-metric.m-risk { border-top-color: #D32F2F; }
+  .z-metric.m-tests { border-top-color: #8400FF; }
+  .z-metric-label { font-size: 11px; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .z-metric-val { font-size: 19px; font-weight: 700; color: #212121; line-height: 1.1; }
+  .z-metric.m-savings .z-metric-val { color: #2E7D32; }
+  .z-metric.m-risk .z-metric-val { color: #D32F2F; }
 
-  .op-footer-cta {
-    background: #005bf8;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 4px;
-    padding: 9px 20px;
-    font-size: 12px;
-    font-weight: 700;
-    font-family: 'Roboto', sans-serif;
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
+  .payback-wrap { margin-bottom: 1.4rem; }
+  .payback-labels { display: flex; justify-content: space-between; font-size: 12px; color: #666666; margin-bottom: 6px; font-weight: 500; }
+  .payback-track { height: 7px; background: #F4F4F4; border-radius: 3px; overflow: hidden; }
+  .payback-fill { height: 100%; background: #005bf8; border-radius: 3px; transition: width 0.4s ease; }
 
-  .op-footer-cta:hover { background: #0049c9; }
+  .z-disclaimer { font-size: 11px; color: #666666; font-weight: 300; line-height: 1.6; margin-bottom: 1.4rem; font-style: italic; }
 
-  @media (max-width: 520px) {
-    .op-how-grid { grid-template-columns: 1fr; }
-    .op-compare-grid { grid-template-columns: 1fr; }
-    .op-pricing-grid { grid-template-columns: 1fr; }
-    .op-stats-row { grid-template-columns: 1fr; }
-    .op-stat { border-right: none; border-bottom: 1px solid #333; }
+  .z-cta-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 0.85rem; border-top: 1px solid #F4F4F4; }
+  .z-btn-primary { background: #005bf8; color: #FFFFFF; border: none; border-radius: 4px; padding: 11px 24px; font-size: 13px; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; }
+  .z-btn-primary:hover { background: #0049c9; }
+  .z-btn-ghost { background: none; border: 1.5px solid #212121; color: #212121; border-radius: 4px; padding: 10px 20px; font-size: 13px; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; }
+  .z-btn-ghost:hover { background: #F4F4F4; }
+
+  @media (max-width: 600px) {
+    .inputs-grid { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: 1fr 1fr; }
+    .z-header { flex-direction: column; align-items: flex-start; }
+    .z-header-title { text-align: left; }
   }
 </style>
+</head>
+<body>
+<div class="z-outer">
+<div class="z-wrap">
 
-<h2 style="position:absolute;left:-9999px;">Zonar V4 CARB Clean Truck Check — product one-pager</h2>
-
-<div class="op-wrap">
-
-  <div class="op-header">
+  <div class="z-header">
     <img src="https://www.zonar.com/hs-fs/hubfs/Zonar_Theme_2026/Images/zonar-header-logo-rev.webp?width=300&height=92&name=zonar-header-logo-rev.webp" alt="Zonar">
-    <div class="op-header-badge">Product Overview</div>
-  </div>
-  <div class="op-accent"></div>
-
-  <div class="op-hero">
-    <div class="op-hero-eyebrow">V4 Automated Emissions Compliance</div>
-    <h1>Stop scheduling tests.<br><span>Start automating compliance.</span></h1>
-    <p>Zonar's CARB-certified V4 device captures and submits Clean Truck Check data automatically during normal vehicle operation — no shop visits, no downtime, no manual coordination.</p>
-  </div>
-
-  <div class="op-stats-row">
-    <div class="op-stat">
-      <div class="op-stat-val">$0</div>
-      <div class="op-stat-label">In-person testing cost with V4 automation</div>
-    </div>
-    <div class="op-stat">
-      <div class="op-stat-val">4x</div>
-      <div class="op-stat-label">Annual tests required starting Oct 2027</div>
-    </div>
-    <div class="op-stat">
-      <div class="op-stat-val">$10K</div>
-      <div class="op-stat-label">Max daily fine per vehicle for non-compliance</div>
+    <div class="z-header-title">
+      <h1>CARB Clean Truck Check ROI Calculator</h1>
+      <p>Compare manual compliance costs vs. Zonar automated emissions checking</p>
     </div>
   </div>
+  <div class="z-accent-bar"></div>
 
-  <div class="op-body">
+  <div class="z-body">
 
-    <div class="op-section-label">How it works</div>
-
-    <div class="op-how-grid">
-      <div class="op-step">
-        <div class="op-step-bar" style="background:#00aeef;"></div>
-        <div class="op-step-num">01 — Install</div>
-        <div class="op-step-title">V4 connects to the OBD port</div>
-        <div class="op-step-body">The V4 device installs directly on the vehicle and connects to the OBD system. OEM-installed hardware on compatible vehicles requires no additional installation.</div>
+    <div class="z-section-label">Your fleet</div>
+    <div class="inputs-grid">
+      <div class="input-row">
+        <label>Number of vehicles</label>
+        <div class="input-inner">
+          <input type="range" id="vehicles" min="5" max="500" step="5" value="50">
+          <span class="val-badge" id="vehicles-out">50</span>
+        </div>
       </div>
-      <div class="op-step">
-        <div class="op-step-bar" style="background:#8400FF;"></div>
-        <div class="op-step-num">02 — Collect</div>
-        <div class="op-step-title">Emissions data captures continuously</div>
-        <div class="op-step-body">During every route, the V4 monitors engine and emissions data in the background. Issues surface during normal operation — not on test day.</div>
+      <div class="input-row">
+        <label>In-person test cost (per test)</label>
+        <div class="input-inner">
+          <input type="range" id="testcost" min="50" max="300" step="10" value="200">
+          <span class="val-badge" id="testcost-out">$200</span>
+        </div>
       </div>
-      <div class="op-step">
-        <div class="op-step-bar" style="background:#66ae00;"></div>
-        <div class="op-step-num">03 — Submit</div>
-        <div class="op-step-title">Auto-submits to CARB on day one</div>
-        <div class="op-step-body">At the start of each 90-day testing window, compliant data is submitted to CARB automatically. No action required from your team.</div>
+      <div class="input-row">
+        <label>Staff hours per test event</label>
+        <div class="input-inner">
+          <input type="range" id="hours" min="0.5" max="8" step="0.5" value="2">
+          <span class="val-badge" id="hours-out">2 hrs</span>
+        </div>
       </div>
-    </div>
-
-    <div class="op-divider"></div>
-    <div class="op-section-label">Manual vs. automated compliance</div>
-
-    <div class="op-compare-grid">
-      <div class="op-compare-card manual">
-        <div class="op-compare-title">Manual process</div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Schedule each vehicle for in-person testing (up to $300/test)</span></div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Pull vehicles out of service, absorbing downtime</span></div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Coordinate across maintenance, dispatch, and operations</span></div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Repeat entire sequence if vehicle fails — under deadline pressure</span></div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Scales to 4x/year in 2027 — manual overhead multiplies</span></div>
+      <div class="input-row">
+        <label>Staff hourly rate</label>
+        <div class="input-inner">
+          <input type="range" id="rate" min="20" max="100" step="5" value="35">
+          <span class="val-badge" id="rate-out">$35</span>
+        </div>
       </div>
-      <div class="op-compare-card zonar">
-        <div class="op-compare-title">Zonar V4 automated</div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Data collected continuously during normal vehicle operation</span></div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Vehicles stay in service — zero testing downtime</span></div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Auto-submitted to CARB — no scheduling or coordination</span></div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Issues surface early, giving time to resolve before deadlines</span></div>
-        <div class="op-compare-item"><div class="op-dot"></div><span>Quarterly testing in 2027 looks exactly the same as today</span></div>
+      <div class="input-row">
+        <label>Est. failure / retest rate</label>
+        <div class="input-inner">
+          <input type="range" id="failrate" min="0" max="30" step="1" value="10">
+          <span class="val-badge" id="failrate-out">10%</span>
+        </div>
       </div>
-    </div>
-
-    <div class="op-cert-banner">
-      <div class="op-cert-title">First-to-market CARB certification — and the only hardwired approval</div>
-      <div class="op-cert-body">Zonar was the first telematics provider to receive a CARB executive order for continuously connected remote OBD testing. Zonar is also the first company certified for CTC compliance through OEM-installed vehicle hardware, and the only provider whose executive order explicitly permits compliance through a hardwired vehicle harness — not just a direct OBD port connection.</div>
-    </div>
-
-    <div class="op-divider"></div>
-    <div class="op-section-label">Pricing options</div>
-
-    <div class="op-pricing-grid">
-      <div class="op-price-card featured">
-        <div class="op-price-badge">Most popular</div>
-        <div class="op-price-name">Emissions Check Add-on</div>
-        <div class="op-price-val">$3</div>
-        <div class="op-price-sub">per asset / month<br>Added to existing Zonar subscription</div>
-      </div>
-      <div class="op-price-card">
-        <div class="op-price-name">Standalone</div>
-        <div class="op-price-val">$25</div>
-        <div class="op-price-sub">per asset / month<br>Emissions Check as a standalone service</div>
-      </div>
-      <div class="op-price-card">
-        <div class="op-price-name">V4 Hardware</div>
-        <div class="op-price-val">$200</div>
-        <div class="op-price-sub">per device (purchase)<br>Or lease for $7/asset/month — no upfront cost</div>
+      <div class="input-row">
+        <label>Non-compliance risk (vehicles/yr)</label>
+        <div class="input-inner">
+          <input type="range" id="riskcount" min="0" max="20" step="1" value="2">
+          <span class="val-badge" id="riskcount-out">2</span>
+        </div>
       </div>
     </div>
 
-    <div style="font-size:10px; color:#666; font-style:italic; font-weight:300; line-height:1.6; margin-bottom:1.25rem;">CARB annual compliance fee of $32.13/vehicle applies separately. Non-compliance penalties up to $10,000/vehicle/day. Tampering violations up to $37,500. Quarterly testing requirement takes effect October 2027 for OBD-equipped vehicles.</div>
+    <div class="z-divider"></div>
+    <div class="z-section-label">Testing cadence</div>
+    <div class="toggle-group" id="cycles-toggle">
+      <button class="z-toggle active-blue" data-cycles="2">Current: 2x / year</button>
+      <button class="z-toggle" data-cycles="4">2027 Quarterly: 4x / year</button>
+    </div>
+
+    <div class="z-divider"></div>
+    <div class="z-section-label">Zonar plan</div>
+    <div class="toggle-group" id="plan-toggle">
+      <button class="z-toggle active-purple" data-plan="addon">Emissions Check Add-on — $3 / asset / mo</button>
+      <button class="z-toggle" data-plan="standalone">Standalone — $25 / asset / mo</button>
+    </div>
+
+    <div class="lease-callout">
+      <div class="lease-callout-text">
+        💡 <strong>No upfront hardware cost?</strong> The V4 device is available to lease for <strong>$7 / asset / month</strong> — no large capital outlay required. Ask your Zonar representative about lease options.
+      </div>
+    </div>
+
+    <div class="z-divider"></div>
+    <div class="z-section-label">Annual cost comparison</div>
+
+    <table class="z-table">
+      <thead>
+        <tr>
+          <th>Cost category</th>
+          <th>Manual process</th>
+          <th class="th-zonar">Zonar automated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-cat">CARB compliance fee ($32.13 / vehicle)</td><td id="t-fee-m">—</td><td id="t-fee-z">—</td></tr>
+        <tr><td class="row-cat">In-person testing costs</td><td id="t-test-m">—</td><td id="t-test-z">$0</td></tr>
+        <tr><td class="row-cat">Staff labor (scheduling + transport)</td><td id="t-labor-m">—</td><td id="t-labor-z">$0</td></tr>
+        <tr><td class="row-cat">Retest costs (failed vehicles)</td><td id="t-retest-m">—</td><td id="t-retest-z">—</td></tr>
+        <tr><td class="row-cat">Non-compliance risk exposure</td><td id="t-risk-m">—</td><td id="t-risk-z">—</td></tr>
+        <tr><td class="row-cat">Zonar subscription</td><td id="t-sub-m">$0</td><td id="t-sub-z">—</td></tr>
+        <tr class="z-total"><td>Total annual cost</td><td class="td-manual" id="t-total-m">—</td><td class="td-zonar" id="t-total-z">—</td></tr>
+      </tbody>
+    </table>
+
+    <div class="savings-banner">
+      <div>
+        <div class="sb-label">Estimated annual savings with Zonar</div>
+        <div class="sb-note" id="sb-note">Based on current inputs</div>
+      </div>
+      <div class="sb-val" id="sb-val">$0</div>
+    </div>
+
+    <div class="payback-wrap" id="payback-section" style="display:none;">
+      <div class="payback-labels">
+        <span>V4 hardware payback period (purchase at $200 / device)</span>
+        <span id="payback-val-label" style="color:#005bf8; font-weight:700;"></span>
+      </div>
+      <div class="payback-track">
+        <div class="payback-fill" id="payback-bar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="z-metric m-savings"><div class="z-metric-label">Savings / vehicle / yr</div><div class="z-metric-val" id="m-per-vehicle">—</div></div>
+      <div class="z-metric m-hours"><div class="z-metric-label">Staff hours saved</div><div class="z-metric-val" id="m-hours">—</div></div>
+      <div class="z-metric m-risk"><div class="z-metric-label">Risk exposure avoided</div><div class="z-metric-val" id="m-risk">—</div></div>
+      <div class="z-metric m-tests"><div class="z-metric-label">Tests automated / yr</div><div class="z-metric-val" id="m-tests">—</div></div>
+    </div>
+
+    <div class="z-disclaimer">* CARB compliance fee based on 2026 rate of $32.13/vehicle/yr. Non-compliance risk calculated at $1,000/vehicle/day × 3-day avg resolution window. Zonar automated monitoring assumed to reduce risk exposure by 80%. Retest costs with Zonar estimated at 15% of manual equivalent. V4 hardware ($200/device) excluded from subscription totals; reflected in payback bar above. V4 lease available at $7/asset/month — contact your Zonar representative. All figures are estimates; actual savings will vary.</div>
+
+    <div class="z-cta-row">
+      <a href="https://www.zonarsystems.com/contact/" target="_blank"><button class="z-btn-primary">Talk to a consultant</button></a>
+      <a href="https://www.zonarsystems.com/solutions/compliance/" target="_blank"><button class="z-btn-ghost">How does it work?</button></a>
+    </div>
 
   </div>
-
-  <div class="op-footer">
-    <div class="op-footer-left">
-      <strong>Ready to automate your fleet's CARB compliance?</strong><br>
-      zonarsystems.com &nbsp;·&nbsp; (877) 843-3847
-    </div>
-    <button class="op-footer-cta" onclick="sendPrompt('I want to talk to a Zonar consultant about V4 CARB compliance for my fleet.')">Talk to a consultant ↗</button>
-  </div>
-
 </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = n => '$' + Math.round(n).toLocaleString();
+  let cycles = 2, plan = 'addon';
+
+  function calc() {
+    const v = parseInt($('vehicles').value);
+    const testCost = parseInt($('testcost').value);
+    const hrs = parseFloat($('hours').value);
+    const rate = parseInt($('rate').value);
+    const failRate = parseInt($('failrate').value) / 100;
+    const riskV = parseInt($('riskcount').value);
+
+    const carbFee = v * 32.13;
+    const totalTests = v * cycles;
+    const manualTest = totalTests * testCost;
+    const manualLabor = totalTests * hrs * rate;
+    const retestM = totalTests * failRate * testCost;
+    const retestZ = totalTests * failRate * 0.15 * testCost;
+    const riskM = riskV * 1000 * 3;
+    const riskZ = riskM * 0.2;
+    const subPer = plan === 'addon' ? 3 : 25;
+    const subZ = v * subPer * 12;
+
+    const totalM = carbFee + manualTest + manualLabor + retestM + riskM;
+    const totalZ = carbFee + retestZ + riskZ + subZ;
+    const savings = totalM - totalZ;
+
+    $('t-fee-m').textContent = fmt(carbFee);
+    $('t-fee-z').textContent = fmt(carbFee);
+    $('t-test-m').textContent = fmt(manualTest);
+    $('t-labor-m').textContent = fmt(manualLabor);
+    $('t-retest-m').textContent = fmt(retestM);
+    $('t-retest-z').textContent = fmt(retestZ);
+    $('t-risk-m').textContent = fmt(riskM);
+    $('t-risk-z').textContent = fmt(riskZ);
+    $('t-sub-z').textContent = fmt(subZ);
+    $('t-total-m').textContent = fmt(totalM);
+    $('t-total-z').textContent = fmt(totalZ);
+    $('sb-val').textContent = savings > 0 ? fmt(savings) : '$0';
+    $('sb-note').textContent = savings > 0
+      ? (cycles === 4 ? 'At 2027 quarterly testing cadence' : 'At current semi-annual cadence')
+      : 'Adjust inputs to see potential savings';
+
+    $('m-per-vehicle').textContent = savings > 0 ? fmt(Math.round(savings / v)) : '$0';
+    $('m-hours').textContent = Math.round(totalTests * hrs).toLocaleString() + ' hrs';
+    $('m-risk').textContent = fmt(riskM - riskZ);
+    $('m-tests').textContent = totalTests.toLocaleString();
+
+    const hwCost = v * 200;
+    if (savings > 0) {
+      const pm = (hwCost / savings) * 12;
+      const pct = Math.min(100, Math.round((pm / 24) * 100));
+      $('payback-bar').style.width = pct + '%';
+      $('payback-val-label').textContent = pm < 1 ? '< 1 month' : pm.toFixed(1) + ' months';
+      $('payback-section').style.display = 'block';
+    } else {
+      $('payback-section').style.display = 'none';
+    }
+  }
+
+  ['vehicles','testcost','hours','rate','failrate','riskcount'].forEach(id => {
+    const el = $(id), out = $(id + '-out');
+    el.addEventListener('input', () => {
+      const v = el.value;
+      if (id === 'vehicles') out.textContent = v;
+      else if (id === 'testcost') out.textContent = '$' + v;
+      else if (id === 'hours') out.textContent = v + ' hrs';
+      else if (id === 'rate') out.textContent = '$' + v;
+      else if (id === 'failrate') out.textContent = v + '%';
+      else if (id === 'riskcount') out.textContent = v;
+      calc();
+    });
+  });
+
+  document.querySelectorAll('#cycles-toggle .z-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#cycles-toggle .z-toggle').forEach(b => b.classList.remove('active-blue'));
+      btn.classList.add('active-blue');
+      cycles = parseInt(btn.dataset.cycles);
+      calc();
+    });
+  });
+
+  document.querySelectorAll('#plan-toggle .z-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#plan-toggle .z-toggle').forEach(b => b.classList.remove('active-purple'));
+      btn.classList.add('active-purple');
+      plan = btn.dataset.plan;
+      calc();
+    });
+  });
+
+  calc();
+</script>
+</body>
+</html>
