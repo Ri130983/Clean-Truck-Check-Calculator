@@ -15,10 +15,7 @@
     min-height: 100vh;
   }
 
-  .z-outer {
-    max-width: 900px;
-    margin: 0 auto;
-  }
+  .z-outer { max-width: 900px; margin: 0 auto; }
 
   .z-wrap {
     font-family: 'Roboto', sans-serif;
@@ -36,25 +33,57 @@
     justify-content: space-between;
     gap: 16px;
   }
-
   .z-header img { height: 38px; width: auto; object-fit: contain; display: block; }
-
   .z-header-title { text-align: right; }
-  .z-header-title h1 {
-    font-size: 15px;
-    font-weight: 700;
-    color: #FFFFFF;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
-  }
-  .z-header-title p {
-    font-size: 12px;
-    color: rgba(255,255,255,0.6);
-    margin-top: 3px;
-    font-weight: 400;
-  }
-
+  .z-header-title h1 { font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.01em; text-transform: uppercase; }
+  .z-header-title p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 3px; font-weight: 400; }
   .z-accent-bar { height: 3px; background: linear-gradient(90deg, #8400FF 0%, #005bf8 50%, #00aeef 100%); }
+
+  /* 2027 Urgency Banner */
+  .urgency-banner {
+    background: #212121;
+    border-left: 5px solid #FFD800;
+    padding: 1.1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .urgency-left { display: flex; align-items: flex-start; gap: 12px; }
+  .urgency-icon {
+    background: #FFD800;
+    color: #212121;
+    font-size: 14px;
+    font-weight: 900;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .urgency-headline { font-size: 14px; font-weight: 700; color: #FFD800; margin-bottom: 4px; }
+  .urgency-sub { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 400; line-height: 1.5; }
+  .urgency-sub strong { color: #FFFFFF; font-weight: 700; }
+  .urgency-btn {
+    background: #FFD800;
+    color: #212121;
+    border: none;
+    border-radius: 4px;
+    padding: 9px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .urgency-btn:hover { background: #f0ca00; }
 
   .z-body { padding: 1.75rem 2rem; }
 
@@ -77,17 +106,15 @@
     gap: 1.1rem 2.5rem;
     margin-bottom: 1.5rem;
   }
-
   .input-row { display: flex; flex-direction: column; gap: 6px; }
   .input-row label { font-size: 13px; color: #666666; font-weight: 500; }
   .input-inner { display: flex; align-items: center; gap: 12px; }
-  .input-inner input[type=range] { flex: 1; accent-color: #005bf8; height: 4px; }
+  .input-inner input[type=range] { flex: 1; accent-color: #005bf8; }
   .val-badge { font-size: 13px; font-weight: 700; color: #005bf8; min-width: 62px; text-align: right; }
 
   .z-divider { height: 1px; background: #F4F4F4; margin: 1.4rem 0; }
 
   .toggle-group { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
-
   .z-toggle {
     font-size: 12px;
     font-weight: 700;
@@ -104,10 +131,57 @@
   .z-toggle.active-blue { border-color: #005bf8; color: #005bf8; background: rgba(0,91,248,0.06); }
   .z-toggle.active-purple { border-color: #8400FF; color: #8400FF; background: rgba(132,0,255,0.06); }
 
-  .lease-callout {
+  /* 2027 Delta Callout */
+  .delta-callout {
+    background: #fff8e1;
+    border: 1.5px solid #FFD800;
+    border-radius: 6px;
+    padding: 1.1rem 1.25rem;
+    margin-top: 0.75rem;
+    display: none;
+  }
+  .delta-callout.visible { display: block; animation: fadeSlide 0.3s ease; }
+  @keyframes fadeSlide { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+  .delta-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 10px;
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .delta-pill {
+    background: #FFD800;
+    color: #212121;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 2px 9px;
+    border-radius: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .delta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .delta-item {
+    background: #FFFFFF;
+    border-radius: 5px;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid #ffe082;
+  }
+  .delta-item-label { font-size: 10px; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
+  .delta-item-val { font-size: 17px; font-weight: 700; }
+  .delta-item-val.up { color: #D32F2F; }
+  .delta-item-val.down { color: #2E7D32; }
+  .delta-note { font-size: 11px; color: #555; line-height: 1.5; font-weight: 400; }
+
+  /* Lease callout */
+  .lease-callout {
     background: #F4F4F4;
     border-left: 3px solid #FFD800;
     border-radius: 0 6px 6px 0;
@@ -124,7 +198,7 @@
   .z-table tbody td { padding: 9px 0; border-bottom: 1px solid #F4F4F4; color: #212121; font-weight: 400; }
   .z-table tbody td:not(:first-child) { text-align: right; }
   .z-table tbody td.row-cat { color: #666666; font-size: 12px; }
-  .z-table tr.z-total td { font-weight: 700; font-size: 14px; padding-top: 13px; border-bottom: none; color: #212121; }
+  .z-table tr.z-total td { font-weight: 700; font-size: 14px; padding-top: 13px; border-bottom: none; }
   .z-table tr.z-total td.td-zonar { color: #005bf8; }
   .z-table tr.z-total td.td-manual { color: #666666; }
 
@@ -164,14 +238,16 @@
   .z-cta-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 0.85rem; border-top: 1px solid #F4F4F4; }
   .z-btn-primary { background: #005bf8; color: #FFFFFF; border: none; border-radius: 4px; padding: 11px 24px; font-size: 13px; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; }
   .z-btn-primary:hover { background: #0049c9; }
-  .z-btn-ghost { background: none; border: 1.5px solid #212121; color: #212121; border-radius: 4px; padding: 10px 20px; font-size: 13px; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; }
+  .z-btn-ghost { background: none; border: 1.5px solid #212121; color: #212121; border-radius: 4px; padding: 10px 20px; font-size: 13px; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; display: inline-block; }
   .z-btn-ghost:hover { background: #F4F4F4; }
 
   @media (max-width: 600px) {
     .inputs-grid { grid-template-columns: 1fr; }
     .metrics-grid { grid-template-columns: 1fr 1fr; }
+    .delta-grid { grid-template-columns: 1fr; }
     .z-header { flex-direction: column; align-items: flex-start; }
     .z-header-title { text-align: left; }
+    .urgency-banner { flex-direction: column; }
   }
 </style>
 </head>
@@ -187,6 +263,17 @@
     </div>
   </div>
   <div class="z-accent-bar"></div>
+
+  <div class="urgency-banner">
+    <div class="urgency-left">
+      <div class="urgency-icon">!</div>
+      <div class="urgency-text">
+        <div class="urgency-headline">October 2027: Testing increases to 4x per year</div>
+        <div class="urgency-sub">California's Clean Truck Check moves to <strong>quarterly testing</strong> for OBD-equipped vehicles. Fleets still relying on manual scheduling will face <strong>4x the coordination, downtime, and risk</strong> — every year.</div>
+      </div>
+    </div>
+    <button class="urgency-btn" id="see-2027-btn">See the 2027 impact ↓</button>
+  </div>
 
   <div class="z-body">
 
@@ -241,6 +328,28 @@
     <div class="toggle-group" id="cycles-toggle">
       <button class="z-toggle active-blue" data-cycles="2">Current: 2x / year</button>
       <button class="z-toggle" data-cycles="4">2027 Quarterly: 4x / year</button>
+    </div>
+
+    <div class="delta-callout" id="delta-callout">
+      <div class="delta-head">
+        <span>At quarterly testing, here's what changes for your fleet</span>
+        <span class="delta-pill">2027 Impact</span>
+      </div>
+      <div class="delta-grid">
+        <div class="delta-item">
+          <div class="delta-item-label">Additional manual cost vs. today</div>
+          <div class="delta-item-val up" id="delta-manual-extra">—</div>
+        </div>
+        <div class="delta-item">
+          <div class="delta-item-label">Additional tests to schedule</div>
+          <div class="delta-item-val up" id="delta-tests-extra">—</div>
+        </div>
+        <div class="delta-item">
+          <div class="delta-item-label">Zonar cost increase vs. today</div>
+          <div class="delta-item-val down" id="delta-zonar-extra">—</div>
+        </div>
+      </div>
+      <div class="delta-note">With Zonar, moving to quarterly testing requires zero additional effort from your team. The V4 device handles every cycle automatically — the same way it does today.</div>
     </div>
 
     <div class="z-divider"></div>
@@ -307,7 +416,7 @@
 
     <div class="z-cta-row">
       <a href="https://www.zonarsystems.com/contact/" target="_blank"><button class="z-btn-primary">Talk to a consultant</button></a>
-      
+      <a href="https://ri130983.github.io/Clean-Truck-Check-Calculator/zonar_v4_ctc_one_pager.html" target="_blank" class="z-btn-ghost">How does it work?</a>
     </div>
 
   </div>
@@ -318,6 +427,16 @@
   const $ = id => document.getElementById(id);
   const fmt = n => '$' + Math.round(n).toLocaleString();
   let cycles = 2, plan = 'addon';
+
+  function manualTotal(v, testCost, hrs, rate, failRate, riskV, c) {
+    const carbFee = v * 32.13;
+    const totalTests = v * c;
+    const manualTest = totalTests * testCost;
+    const manualLabor = totalTests * hrs * rate;
+    const retestM = totalTests * failRate * testCost;
+    const riskM = riskV * 1000 * 3;
+    return carbFee + manualTest + manualLabor + retestM + riskM;
+  }
 
   function calc() {
     const v = parseInt($('vehicles').value);
@@ -373,6 +492,17 @@
     } else {
       $('payback-section').style.display = 'none';
     }
+
+    if (cycles === 4) {
+      const m2x = manualTotal(v, testCost, hrs, rate, failRate, riskV, 2);
+      const m4x = manualTotal(v, testCost, hrs, rate, failRate, riskV, 4);
+      $('delta-manual-extra').textContent = '+' + fmt(m4x - m2x) + '/yr';
+      $('delta-tests-extra').textContent = '+' + (v * 2).toLocaleString() + ' tests';
+      $('delta-zonar-extra').textContent = '$0';
+      $('delta-callout').classList.add('visible');
+    } else {
+      $('delta-callout').classList.remove('visible');
+    }
   }
 
   ['vehicles','testcost','hours','rate','failrate','riskcount'].forEach(id => {
@@ -405,6 +535,14 @@
       plan = btn.dataset.plan;
       calc();
     });
+  });
+
+  $('see-2027-btn').addEventListener('click', () => {
+    document.querySelectorAll('#cycles-toggle .z-toggle').forEach(b => b.classList.remove('active-blue'));
+    document.querySelector('#cycles-toggle [data-cycles="4"]').classList.add('active-blue');
+    cycles = 4;
+    calc();
+    $('delta-callout').scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 
   calc();
