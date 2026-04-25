@@ -1,8 +1,24 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zonar CARB Clean Truck Check ROI Calculator</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #F4F4F4;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+
+  .z-outer {
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
   .z-wrap {
     font-family: 'Roboto', sans-serif;
@@ -14,49 +30,41 @@
 
   .z-header {
     background: #212121;
-    padding: 1rem 1.75rem;
+    padding: 1.1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
   }
 
-  .z-header img {
-    height: 36px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-  }
+  .z-header img { height: 38px; width: auto; object-fit: contain; display: block; }
 
   .z-header-title { text-align: right; }
   .z-header-title h1 {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: #FFFFFF;
     letter-spacing: 0.01em;
     text-transform: uppercase;
   }
   .z-header-title p {
-    font-size: 11px;
+    font-size: 12px;
     color: rgba(255,255,255,0.6);
-    margin-top: 2px;
+    margin-top: 3px;
     font-weight: 400;
   }
 
-  .z-accent-bar {
-    height: 3px;
-    background: linear-gradient(90deg, #8400FF 0%, #005bf8 50%, #00aeef 100%);
-  }
+  .z-accent-bar { height: 3px; background: linear-gradient(90deg, #8400FF 0%, #005bf8 50%, #00aeef 100%); }
 
-  .z-body { padding: 1.5rem 1.75rem; }
+  .z-body { padding: 1.75rem 2rem; }
 
   .z-section-label {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #8400FF;
-    margin-bottom: 0.9rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -66,24 +74,24 @@
   .inputs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem 2rem;
+    gap: 1.1rem 2.5rem;
     margin-bottom: 1.5rem;
   }
 
-  .input-row { display: flex; flex-direction: column; gap: 5px; }
-  .input-row label { font-size: 11px; color: #666666; font-weight: 500; letter-spacing: 0.02em; }
-  .input-inner { display: flex; align-items: center; gap: 10px; }
-  .input-inner input[type=range] { flex: 1; accent-color: #005bf8; }
-  .val-badge { font-size: 12px; font-weight: 700; color: #005bf8; min-width: 58px; text-align: right; }
+  .input-row { display: flex; flex-direction: column; gap: 6px; }
+  .input-row label { font-size: 13px; color: #666666; font-weight: 500; }
+  .input-inner { display: flex; align-items: center; gap: 12px; }
+  .input-inner input[type=range] { flex: 1; accent-color: #005bf8; height: 4px; }
+  .val-badge { font-size: 13px; font-weight: 700; color: #005bf8; min-width: 62px; text-align: right; }
 
-  .z-divider { height: 1px; background: #F4F4F4; margin: 1.25rem 0; }
+  .z-divider { height: 1px; background: #F4F4F4; margin: 1.4rem 0; }
 
-  .toggle-group { display: flex; gap: 6px; margin-bottom: 0.9rem; flex-wrap: wrap; }
+  .toggle-group { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
 
   .z-toggle {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
-    padding: 5px 14px;
+    padding: 6px 16px;
     border-radius: 20px;
     border: 1.5px solid #e0e0e0;
     background: #FFFFFF;
@@ -103,71 +111,74 @@
     background: #F4F4F4;
     border-left: 3px solid #FFD800;
     border-radius: 0 6px 6px 0;
-    padding: 9px 14px;
-    margin-bottom: 1.25rem;
+    padding: 10px 14px;
+    margin-bottom: 1.4rem;
   }
-  .lease-callout-text { font-size: 11px; color: #212121; line-height: 1.5; font-weight: 400; }
+  .lease-callout-text { font-size: 12px; color: #212121; line-height: 1.5; font-weight: 400; }
   .lease-callout-text strong { font-weight: 700; }
 
-  .z-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 1.25rem; }
-  .z-table thead th { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #666666; padding: 6px 0; border-bottom: 2px solid #F4F4F4; text-align: left; }
+  .z-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1.4rem; }
+  .z-table thead th { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #666666; padding: 7px 0; border-bottom: 2px solid #F4F4F4; text-align: left; }
   .z-table thead th:not(:first-child) { text-align: right; }
   .z-table thead th.th-zonar { color: #005bf8; }
-  .z-table tbody td { padding: 8px 0; border-bottom: 1px solid #F4F4F4; color: #212121; font-weight: 400; }
+  .z-table tbody td { padding: 9px 0; border-bottom: 1px solid #F4F4F4; color: #212121; font-weight: 400; }
   .z-table tbody td:not(:first-child) { text-align: right; }
-  .z-table tbody td.row-cat { color: #666666; font-size: 11px; }
-  .z-table tr.z-total td { font-weight: 700; font-size: 13px; padding-top: 12px; border-bottom: none; color: #212121; }
+  .z-table tbody td.row-cat { color: #666666; font-size: 12px; }
+  .z-table tr.z-total td { font-weight: 700; font-size: 14px; padding-top: 13px; border-bottom: none; color: #212121; }
   .z-table tr.z-total td.td-zonar { color: #005bf8; }
   .z-table tr.z-total td.td-manual { color: #666666; }
 
   .savings-banner {
     background: #212121;
     border-radius: 6px;
-    padding: 1rem 1.25rem;
+    padding: 1.1rem 1.4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.4rem;
   }
-  .sb-label { font-size: 11px; font-weight: 700; color: #FFD800; letter-spacing: 0.06em; text-transform: uppercase; }
-  .sb-note { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 3px; font-weight: 300; }
-  .sb-val { font-size: 28px; font-weight: 900; color: #FFFFFF; letter-spacing: -0.01em; }
+  .sb-label { font-size: 12px; font-weight: 700; color: #FFD800; letter-spacing: 0.06em; text-transform: uppercase; }
+  .sb-note { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 3px; font-weight: 300; }
+  .sb-val { font-size: 30px; font-weight: 900; color: #FFFFFF; letter-spacing: -0.01em; }
 
-  .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1.25rem; }
-  .z-metric { background: #F4F4F4; border-radius: 6px; padding: 0.75rem 0.85rem; border-top: 3px solid transparent; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.4rem; }
+  .z-metric { background: #F4F4F4; border-radius: 6px; padding: 0.9rem 1rem; border-top: 3px solid transparent; }
   .z-metric.m-savings { border-top-color: #66ae00; }
   .z-metric.m-hours { border-top-color: #00aeef; }
   .z-metric.m-risk { border-top-color: #D32F2F; }
   .z-metric.m-tests { border-top-color: #8400FF; }
-  .z-metric-label { font-size: 10px; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
-  .z-metric-val { font-size: 17px; font-weight: 700; color: #212121; line-height: 1.1; }
+  .z-metric-label { font-size: 11px; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .z-metric-val { font-size: 19px; font-weight: 700; color: #212121; line-height: 1.1; }
   .z-metric.m-savings .z-metric-val { color: #2E7D32; }
   .z-metric.m-risk .z-metric-val { color: #D32F2F; }
 
-  .payback-wrap { margin-bottom: 1.25rem; }
-  .payback-labels { display: flex; justify-content: space-between; font-size: 11px; color: #666666; margin-bottom: 5px; font-weight: 500; }
-  .payback-track { height: 6px; background: #F4F4F4; border-radius: 3px; overflow: hidden; }
+  .payback-wrap { margin-bottom: 1.4rem; }
+  .payback-labels { display: flex; justify-content: space-between; font-size: 12px; color: #666666; margin-bottom: 6px; font-weight: 500; }
+  .payback-track { height: 7px; background: #F4F4F4; border-radius: 3px; overflow: hidden; }
   .payback-fill { height: 100%; background: #005bf8; border-radius: 3px; transition: width 0.4s ease; }
 
-  .z-disclaimer { font-size: 10px; color: #666666; font-weight: 300; line-height: 1.6; margin-bottom: 1.25rem; font-style: italic; }
+  .z-disclaimer { font-size: 11px; color: #666666; font-weight: 300; line-height: 1.6; margin-bottom: 1.4rem; font-style: italic; }
 
-  .z-cta-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 0.75rem; border-top: 1px solid #F4F4F4; }
-  .z-btn-primary { background: #005bf8; color: #FFFFFF; border: none; border-radius: 4px; padding: 10px 22px; font-size: 12px; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; }
+  .z-cta-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 0.85rem; border-top: 1px solid #F4F4F4; }
+  .z-btn-primary { background: #005bf8; color: #FFFFFF; border: none; border-radius: 4px; padding: 11px 24px; font-size: 13px; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; }
   .z-btn-primary:hover { background: #0049c9; }
-  .z-btn-ghost { background: none; border: 1.5px solid #212121; color: #212121; border-radius: 4px; padding: 9px 18px; font-size: 12px; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; }
+  .z-btn-ghost { background: none; border: 1.5px solid #212121; color: #212121; border-radius: 4px; padding: 10px 20px; font-size: 13px; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; letter-spacing: 0.04em; text-transform: uppercase; }
   .z-btn-ghost:hover { background: #F4F4F4; }
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     .inputs-grid { grid-template-columns: 1fr; }
     .metrics-grid { grid-template-columns: 1fr 1fr; }
+    .z-header { flex-direction: column; align-items: flex-start; }
+    .z-header-title { text-align: left; }
   }
 </style>
-
-<h2 style="position:absolute;left:-9999px;">Zonar CARB Clean Truck Check ROI Calculator</h2>
-
+</head>
+<body>
+<div class="z-outer">
 <div class="z-wrap">
+
   <div class="z-header">
     <img src="https://www.zonar.com/hs-fs/hubfs/Zonar_Theme_2026/Images/zonar-header-logo-rev.webp?width=300&height=92&name=zonar-header-logo-rev.webp" alt="Zonar">
     <div class="z-header-title">
@@ -275,7 +286,7 @@
       <div class="sb-val" id="sb-val">$0</div>
     </div>
 
-    <div class="payback-wrap" id="payback-section">
+    <div class="payback-wrap" id="payback-section" style="display:none;">
       <div class="payback-labels">
         <span>V4 hardware payback period (purchase at $200 / device)</span>
         <span id="payback-val-label" style="color:#005bf8; font-weight:700;"></span>
@@ -295,11 +306,12 @@
     <div class="z-disclaimer">* CARB compliance fee based on 2026 rate of $32.13/vehicle/yr. Non-compliance risk calculated at $1,000/vehicle/day × 3-day avg resolution window. Zonar automated monitoring assumed to reduce risk exposure by 80%. Retest costs with Zonar estimated at 15% of manual equivalent. V4 hardware ($200/device) excluded from subscription totals; reflected in payback bar above. V4 lease available at $7/asset/month — contact your Zonar representative. All figures are estimates; actual savings will vary.</div>
 
     <div class="z-cta-row">
-      <button class="z-btn-primary" onclick="sendPrompt('I want to talk to a Zonar consultant about CARB compliance and V4 pricing for my fleet.')">Talk to a consultant ↗</button>
-      <button class="z-btn-ghost" onclick="sendPrompt('Can you explain how Zonar\'s V4 device automates CARB Clean Truck Check compliance?')">How does it work? ↗</button>
+      <a href="https://www.zonarsystems.com/contact/" target="_blank"><button class="z-btn-primary">Talk to a consultant</button></a>
+      <a href="https://www.zonarsystems.com/solutions/compliance/" target="_blank"><button class="z-btn-ghost">How does it work?</button></a>
     </div>
 
   </div>
+</div>
 </div>
 
 <script>
@@ -397,3 +409,5 @@
 
   calc();
 </script>
+</body>
+</html>
