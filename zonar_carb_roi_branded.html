@@ -100,6 +100,14 @@
   }
   .z-section-label::after { content: ''; flex: 1; height: 1px; background: #F4F4F4; }
 
+  .z-section-instruction {
+    font-size: 13px;
+    color: #666666;
+    font-weight: 400;
+    margin-bottom: 1.1rem;
+    margin-top: -0.25rem;
+  }
+
   .inputs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -213,9 +221,9 @@
     flex-wrap: wrap;
     margin-bottom: 1.4rem;
   }
-  .sb-label { font-size: 12px; font-weight: 700; color: #FFD800; letter-spacing: 0.06em; text-transform: uppercase; }
+  .sb-label { font-size: 12px; font-weight: 700; color: #66ae00; letter-spacing: 0.06em; text-transform: uppercase; }
   .sb-note { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 3px; font-weight: 300; }
-  .sb-val { font-size: 30px; font-weight: 900; color: #FFFFFF; letter-spacing: -0.01em; }
+  .sb-val { font-size: 30px; font-weight: 900; color: #66ae00; letter-spacing: -0.01em; }
 
   .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.4rem; }
   .z-metric { background: #F4F4F4; border-radius: 6px; padding: 0.9rem 1rem; border-top: 3px solid transparent; }
@@ -269,15 +277,16 @@
       <div class="urgency-icon">!</div>
       <div class="urgency-text">
         <div class="urgency-headline">October 2027: Testing increases to 4x per year</div>
-        <div class="urgency-sub">California's Clean Truck Check moves to <strong>quarterly testing</strong> for OBD-equipped vehicles. Fleets still relying on manual scheduling will face <strong>4x the coordination, downtime, and risk</strong> — every year.</div>
+        <div class="urgency-sub">California's Clean Truck Check moves to <strong>quarterly testing</strong> for OBD-equipped vehicles. Fleets still relying on manual scheduling will face <strong>4x the coordination, downtime, and risk</strong> - every year.</div>
       </div>
     </div>
-    <button class="urgency-btn" id="see-2027-btn">See the 2027 impact ↓</button>
+    <button class="urgency-btn" id="see-2027-btn">See the 2027 impact</button>
   </div>
 
   <div class="z-body">
 
     <div class="z-section-label">Your fleet</div>
+    <p class="z-section-instruction">Adjust the six data points below to calculate your cost and savings.</p>
     <div class="inputs-grid">
       <div class="input-row">
         <label>Number of vehicles</label>
@@ -324,7 +333,7 @@
     </div>
 
     <div class="z-divider"></div>
-    <div class="z-section-label">Testing cadence</div>
+    <div class="z-section-label">Select testing cadence</div>
     <div class="toggle-group" id="cycles-toggle">
       <button class="z-toggle active-blue" data-cycles="2">Current: 2x / year</button>
       <button class="z-toggle" data-cycles="4">2027 Quarterly: 4x / year</button>
@@ -338,30 +347,30 @@
       <div class="delta-grid">
         <div class="delta-item">
           <div class="delta-item-label">Additional manual cost vs. today</div>
-          <div class="delta-item-val up" id="delta-manual-extra">—</div>
+          <div class="delta-item-val up" id="delta-manual-extra">-</div>
         </div>
         <div class="delta-item">
           <div class="delta-item-label">Additional tests to schedule</div>
-          <div class="delta-item-val up" id="delta-tests-extra">—</div>
+          <div class="delta-item-val up" id="delta-tests-extra">-</div>
         </div>
         <div class="delta-item">
           <div class="delta-item-label">Zonar cost increase vs. today</div>
-          <div class="delta-item-val down" id="delta-zonar-extra">—</div>
+          <div class="delta-item-val down" id="delta-zonar-extra">-</div>
         </div>
       </div>
-      <div class="delta-note">With Zonar, moving to quarterly testing requires zero additional effort from your team. The V4 device handles every cycle automatically — the same way it does today.</div>
+      <div class="delta-note">With Zonar, moving to quarterly testing requires zero additional effort from your team. The V4 device handles every cycle automatically - the same way it does today.</div>
     </div>
 
     <div class="z-divider"></div>
     <div class="z-section-label">Zonar plan</div>
     <div class="toggle-group" id="plan-toggle">
-      <button class="z-toggle active-purple" data-plan="addon">Emissions Check Add-on — $3 / asset / mo</button>
-      <button class="z-toggle" data-plan="standalone">Standalone — $25 / asset / mo</button>
+      <button class="z-toggle active-purple" data-plan="addon">Existing Zonar customers - Add-on ($3 / asset / mo)</button>
+      <button class="z-toggle" data-plan="standalone">No V4 yet - Standalone ($25 / asset / mo)</button>
     </div>
 
     <div class="lease-callout">
       <div class="lease-callout-text">
-        💡 <strong>No upfront hardware cost?</strong> The V4 device is available to lease for <strong>$7 / asset / month</strong> — no large capital outlay required. Ask your Zonar representative about lease options.
+        💡 <strong>No upfront hardware cost?</strong> The V4 device is available to lease for <strong>$7 / asset / month</strong> - no large capital outlay required. Ask your Zonar representative about lease options.
       </div>
     </div>
 
@@ -377,13 +386,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td class="row-cat">CARB compliance fee ($32.13 / vehicle)</td><td id="t-fee-m">—</td><td id="t-fee-z">—</td></tr>
-        <tr><td class="row-cat">In-person testing costs</td><td id="t-test-m">—</td><td id="t-test-z">$0</td></tr>
-        <tr><td class="row-cat">Staff labor (scheduling + transport)</td><td id="t-labor-m">—</td><td id="t-labor-z">$0</td></tr>
-        <tr><td class="row-cat">Retest costs (failed vehicles)</td><td id="t-retest-m">—</td><td id="t-retest-z">—</td></tr>
-        <tr><td class="row-cat">Non-compliance risk exposure</td><td id="t-risk-m">—</td><td id="t-risk-z">—</td></tr>
-        <tr><td class="row-cat">Zonar subscription</td><td id="t-sub-m">$0</td><td id="t-sub-z">—</td></tr>
-        <tr class="z-total"><td>Total annual cost</td><td class="td-manual" id="t-total-m">—</td><td class="td-zonar" id="t-total-z">—</td></tr>
+        <tr><td class="row-cat">CARB compliance fee ($32.13 / vehicle)</td><td id="t-fee-m">-</td><td id="t-fee-z">-</td></tr>
+        <tr><td class="row-cat">In-person testing costs</td><td id="t-test-m">-</td><td id="t-test-z">$0</td></tr>
+        <tr><td class="row-cat">Staff labor (scheduling + transport)</td><td id="t-labor-m">-</td><td id="t-labor-z">$0</td></tr>
+        <tr><td class="row-cat">Retest costs (failed vehicles)</td><td id="t-retest-m">-</td><td id="t-retest-z">-</td></tr>
+        <tr><td class="row-cat">Non-compliance risk exposure</td><td id="t-risk-m">-</td><td id="t-risk-z">-</td></tr>
+        <tr><td class="row-cat">Zonar subscription</td><td id="t-sub-m">$0</td><td id="t-sub-z">-</td></tr>
+        <tr class="z-total"><td>Total annual cost</td><td class="td-manual" id="t-total-m">-</td><td class="td-zonar" id="t-total-z">-</td></tr>
       </tbody>
     </table>
 
@@ -406,13 +415,13 @@
     </div>
 
     <div class="metrics-grid">
-      <div class="z-metric m-savings"><div class="z-metric-label">Savings / vehicle / yr</div><div class="z-metric-val" id="m-per-vehicle">—</div></div>
-      <div class="z-metric m-hours"><div class="z-metric-label">Staff hours saved</div><div class="z-metric-val" id="m-hours">—</div></div>
-      <div class="z-metric m-risk"><div class="z-metric-label">Risk exposure avoided</div><div class="z-metric-val" id="m-risk">—</div></div>
-      <div class="z-metric m-tests"><div class="z-metric-label">Tests automated / yr</div><div class="z-metric-val" id="m-tests">—</div></div>
+      <div class="z-metric m-savings"><div class="z-metric-label">Savings / vehicle / yr</div><div class="z-metric-val" id="m-per-vehicle">-</div></div>
+      <div class="z-metric m-hours"><div class="z-metric-label">Staff hours saved</div><div class="z-metric-val" id="m-hours">-</div></div>
+      <div class="z-metric m-risk"><div class="z-metric-label">Risk exposure avoided</div><div class="z-metric-val" id="m-risk">-</div></div>
+      <div class="z-metric m-tests"><div class="z-metric-label">Tests automated / yr</div><div class="z-metric-val" id="m-tests">-</div></div>
     </div>
 
-    <div class="z-disclaimer">* CARB compliance fee based on 2026 rate of $32.13/vehicle/yr. Non-compliance risk calculated at $1,000/vehicle/day × 3-day avg resolution window. Zonar automated monitoring assumed to reduce risk exposure by 80%. Retest costs with Zonar estimated at 15% of manual equivalent. V4 hardware ($200/device) excluded from subscription totals; reflected in payback bar above. V4 lease available at $7/asset/month — contact your Zonar representative. All figures are estimates; actual savings will vary.</div>
+    <div class="z-disclaimer">* CARB compliance fee based on 2026 rate of $32.13/vehicle/yr. Non-compliance risk calculated at $1,000/vehicle/day x 3-day avg resolution window. Zonar automated monitoring assumed to reduce risk exposure by 80%. Retest costs with Zonar estimated at 15% of manual equivalent. V4 hardware ($200/device) excluded from subscription totals; reflected in payback bar above. V4 lease available at $7/asset/month - contact your Zonar representative. All figures are estimates; actual savings will vary.</div>
 
     <div class="z-cta-row">
       <a href="https://www.zonar.com/contact/" target="_blank"><button class="z-btn-primary">Talk to a consultant</button></a>
