@@ -1,165 +1,217 @@
+  <style>
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #fff;
+      color: #212121;
+    }
+    .roi-outer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .roi-inner { width: 100%; max-width: 960px; }
+    .roi-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #00aeef;
+      margin-bottom: 0.5rem;
+    }
+    .roi-headline {
+      font-size: 28px;
+      font-weight: 700;
+      color: #212121;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .roi-subline {
+      font-size: 15px;
+      color: #666666;
+      margin-bottom: 2rem;
+      max-width: 520px;
+    }
+    .roi-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .roi-inputs { display: flex; flex-direction: column; gap: 1.25rem; }
+    .roi-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #666666;
+      margin-bottom: 8px;
+    }
+    .roi-field .input-row { display: flex; align-items: center; gap: 10px; }
+    .roi-field input[type=range] { flex: 1; accent-color: #00aeef; }
+    .roi-field .val {
+      font-size: 14px;
+      font-weight: 500;
+      color: #212121;
+      min-width: 60px;
+      text-align: right;
+    }
 
-<style>
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-.roi-outer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 3rem 2rem;
-  font-family: 'Roboto', sans-serif;
-  background: var(--color-background-primary);
-}
-.roi-inner { width: 100%; max-width: 960px; }
-.roi-eyebrow {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #00aeef;
-  margin-bottom: 0.5rem;
-}
-.roi-headline {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  line-height: 1.2;
-  margin-bottom: 0.5rem;
-}
-.roi-subline {
-  font-size: 15px;
-  color: var(--color-text-secondary);
-  margin-bottom: 2rem;
-  max-width: 520px;
-}
-.roi-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-.roi-inputs { display: flex; flex-direction: column; gap: 1.25rem; }
-.roi-field label {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text-secondary);
-  margin-bottom: 6px;
-}
-.roi-field .input-row { display: flex; align-items: center; gap: 10px; }
-.roi-field input[type=range] { flex: 1; accent-color: #00aeef; }
-.roi-field .val {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  min-width: 60px;
-  text-align: right;
-}
-.roi-toggle-group {
-  display: flex;
-  border: 1px solid var(--color-border-tertiary);
-  border-radius: var(--border-radius-md);
-  overflow: hidden;
-}
-.roi-toggle-group button {
-  flex: 1;
-  padding: 8px 12px;
-  font-size: 13px;
-  font-weight: 500;
-  border: none;
-  background: var(--color-background-primary);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-}
-.roi-toggle-group button.active { background: #00aeef; color: #fff; }
-.roi-toggle-group button:not(:last-child) { border-right: 1px solid var(--color-border-tertiary); }
-.roi-toggle-group button[data-val="4"].active { background: #FFB300; color: #212121; }
-.callout-2027 {
-  display: none;
-  align-items: flex-start;
-  gap: 10px;
-  background: #fff8e1;
-  border: 1px solid #FFB300;
-  border-left: 4px solid #FFB300;
-  border-radius: var(--border-radius-md);
-  padding: 10px 14px;
-  font-size: 13px;
-  color: #5a3e00;
-  line-height: 1.5;
-  margin-top: 10px;
-}
-.callout-2027.visible { display: flex; }
-.callout-2027 .icon { font-size: 16px; margin-top: 1px; flex-shrink: 0; color: #FFB300; }
-.callout-2027 strong { font-weight: 500; color: #3d2a00; }
-.roi-results {
-  background: #f7fbfe;
-  border: 1px solid #b5d4f4;
-  border-radius: var(--border-radius-lg);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.roi-results-title {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #185fa5;
-  margin-bottom: 0.25rem;
-}
-.roi-big {
-  text-align: center;
-  padding: 1.25rem 0;
-  border-bottom: 1px solid #b5d4f4;
-  margin-bottom: 0.5rem;
-}
-.roi-big .label {
-  font-size: 12px;
-  color: #185fa5;
-  font-weight: 500;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-.roi-big .amount { font-size: 40px; font-weight: 700; color: #66ae00; line-height: 1; }
-.roi-big .sub { font-size: 12px; color: var(--color-text-secondary); margin-top: 4px; }
-.roi-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  padding: 4px 0;
-}
-.roi-line .lbl { color: var(--color-text-secondary); }
-.roi-line .amt { font-weight: 500; color: var(--color-text-primary); }
-.roi-line.highlight .amt { color: #D32F2F; }
-.roi-line.savings .amt { color: #66ae00; font-weight: 700; }
-.roi-divider { border: none; border-top: 1px solid #b5d4f4; margin: 0.25rem 0; }
-.roi-cta {
-  display: block;
-  margin-top: 0.5rem;
-  background: #00aeef;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 10px 20px;
-  border-radius: 100px;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-  width: 100%;
-}
-.roi-cta:hover { background: #0098d4; }
-.roi-disclaimer {
-  font-size: 11px;
-  color: var(--color-text-secondary);
-  margin-top: 1.5rem;
-  line-height: 1.6;
-}
-@media (max-width: 600px) { .roi-body { grid-template-columns: 1fr; } }
-</style>
+    /* Toggle button group */
+    .roi-toggle-group {
+      display: flex;
+      gap: 8px;
+      background: #f0f4f8;
+      border-radius: 10px;
+      padding: 5px;
+    }
+    .roi-toggle-group button {
+      flex: 1;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      border-radius: 7px;
+      background: transparent;
+      color: #555;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      box-shadow: none;
+      font-family: 'Roboto', sans-serif;
+    }
+    .roi-toggle-group button:hover:not(.active) {
+      background: #fff;
+      color: #212121;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+    .roi-toggle-group button.active {
+      background: #fff;
+      color: #00aeef;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.14), 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .roi-toggle-group button[data-val="4"].active {
+      background: #fff8e1;
+      color: #7a4f00;
+      box-shadow: 0 2px 8px rgba(255,179,0,0.25), 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .roi-toggle-group button.active::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00aeef;
+      margin-right: 6px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+    .roi-toggle-group button[data-val="4"].active::before {
+      background: #FFB300;
+    }
+
+    .callout-2027 {
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      background: #fff8e1;
+      border: 1px solid #FFB300;
+      border-left: 4px solid #FFB300;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #5a3e00;
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+    .callout-2027.visible { display: flex; }
+    .callout-2027 strong { font-weight: 600; color: #3d2a00; }
+
+    .roi-results {
+      background: #f7fbfe;
+      border: 1px solid #b5d4f4;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 4px 16px rgba(0,120,200,0.08);
+    }
+    .roi-results-title {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #185fa5;
+      margin-bottom: 0.25rem;
+    }
+    .roi-big {
+      text-align: center;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid #b5d4f4;
+      margin-bottom: 0.5rem;
+    }
+    .roi-big .label {
+      font-size: 12px;
+      color: #185fa5;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .roi-big .amount { font-size: 40px; font-weight: 700; color: #66ae00; line-height: 1; }
+    .roi-big .sub { font-size: 12px; color: #666666; margin-top: 4px; }
+    .roi-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      padding: 4px 0;
+    }
+    .roi-line .lbl { color: #666666; }
+    .roi-line .amt { font-weight: 500; color: #212121; }
+    .roi-line.highlight .amt { color: #D32F2F; }
+    .roi-line.savings .amt { color: #66ae00; font-weight: 700; }
+    .roi-divider { border: none; border-top: 1px solid #b5d4f4; margin: 0.25rem 0; }
+    .roi-cta {
+      display: block;
+      margin-top: 0.5rem;
+      background: #00aeef;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 100px;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+      font-family: 'Roboto', sans-serif;
+      box-shadow: 0 3px 10px rgba(0,174,239,0.35);
+      transition: background 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+    }
+    .roi-cta:hover {
+      background: #0098d4;
+      box-shadow: 0 4px 14px rgba(0,174,239,0.5);
+    }
+    .roi-disclaimer {
+      font-size: 11px;
+      color: #666666;
+      margin-top: 1.5rem;
+      line-height: 1.6;
+    }
+    @media (max-width: 600px) {
+      .roi-body { grid-template-columns: 1fr; }
+      .roi-headline { font-size: 22px; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
 <h2 class="sr-only">Zonar Emissions Check ROI Calculator — estimate your annual compliance savings</h2>
 
@@ -187,8 +239,7 @@
             <button data-val="4">4 scans/yr (Oct 2027+)</button>
           </div>
           <div class="callout-2027" id="callout-2027">
-            <i class="ti ti-alert-triangle icon" aria-hidden="true"></i>
-            <span><strong>Heads up:</strong> Starting October 2027, CARB requires scan frequency to double from 2 to 4 per vehicle per year. Plan ahead to avoid compliance gaps.</span>
+            <span>⚠️ <strong>Heads up:</strong> Starting October 2027, CARB requires scan frequency to double from 2 to 4 per vehicle per year. Plan ahead to avoid compliance gaps.</span>
           </div>
         </div>
 
@@ -222,7 +273,7 @@
         <div class="roi-results-title">Your estimate</div>
         <div class="roi-big">
           <div class="label">Annual savings with Zonar</div>
-          <div class="amount" id="savings-big">$0</div>
+          <div class="amount" id="savings-big">$20,700</div>
           <div class="sub" id="savings-sub">Add-on @ $3/asset/mo</div>
         </div>
         <div class="roi-line">
@@ -255,7 +306,7 @@
           <span class="lbl">Net annual savings</span>
           <span class="amt" id="r-net-savings">$20,700</span>
         </div>
-        <button class="roi-cta" onclick="sendPrompt('I want to learn more about Zonar Emissions Check pricing for my fleet')">Get pricing for my fleet ↗</button>
+        <a class="roi-cta" href="https://www.zonar.com/solutions/carb-clean-truck-emissions-check/" target="_blank">Get pricing for my fleet ↗</a>
       </div>
     </div>
 
@@ -264,66 +315,69 @@
 </div>
 
 <script>
-const vSlider = document.getElementById('vehicles');
-const scSlider = document.getElementById('scan-cost');
-const dtSlider = document.getElementById('downtime');
-const vOut = document.getElementById('v-out');
-const scOut = document.getElementById('sc-out');
-const dtOut = document.getElementById('dt-out');
-const callout = document.getElementById('callout-2027');
+  const vSlider = document.getElementById('vehicles');
+  const scSlider = document.getElementById('scan-cost');
+  const dtSlider = document.getElementById('downtime');
+  const vOut = document.getElementById('v-out');
+  const scOut = document.getElementById('sc-out');
+  const dtOut = document.getElementById('dt-out');
+  const callout = document.getElementById('callout-2027');
 
-let scansPerYear = 2;
-let serviceType = 'addon';
+  let scansPerYear = 2;
+  let serviceType = 'addon';
 
-function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+  function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
 
-function calc() {
-  const vehicles = parseInt(vSlider.value);
-  const scanCost = parseInt(scSlider.value);
-  const downtime = parseInt(dtSlider.value);
-  const totalScans = vehicles * scansPerYear;
-  const withoutZonar = (scanCost * totalScans) + (downtime * totalScans);
-  const zonarMonthly = serviceType === 'addon' ? 3 : 25;
-  const zonarAnnual = zonarMonthly * vehicles * 12;
-  const savings = withoutZonar - zonarAnnual;
+  function calc() {
+    const vehicles = parseInt(vSlider.value);
+    const scanCost = parseInt(scSlider.value);
+    const downtime = parseInt(dtSlider.value);
+    const totalScans = vehicles * scansPerYear;
+    const withoutZonar = (scanCost * totalScans) + (downtime * totalScans);
+    const zonarMonthly = serviceType === 'addon' ? 3 : 25;
+    const zonarAnnual = zonarMonthly * vehicles * 12;
+    const savings = withoutZonar - zonarAnnual;
 
-  vOut.textContent = vehicles;
-  scOut.textContent = '$' + scanCost;
-  dtOut.textContent = '$' + downtime;
+    vOut.textContent = vehicles;
+    scOut.textContent = '$' + scanCost;
+    dtOut.textContent = '$' + downtime;
 
-  document.getElementById('r-fleet').textContent = vehicles + ' vehicles';
-  document.getElementById('r-scans').textContent = totalScans.toLocaleString() + ' scans';
-  document.getElementById('r-scan-cost').textContent = fmt(scanCost * totalScans);
-  document.getElementById('r-downtime').textContent = fmt(downtime * totalScans);
-  document.getElementById('r-total-without').textContent = fmt(withoutZonar);
-  document.getElementById('r-zonar-cost').textContent = fmt(zonarAnnual) + '/yr';
-  document.getElementById('r-net-savings').textContent = fmt(Math.max(savings, 0));
-  document.getElementById('savings-big').textContent = fmt(Math.max(savings, 0));
-  document.getElementById('savings-sub').textContent = serviceType === 'addon' ? 'Add-on @ $3/asset/mo' : 'Standalone @ $25/asset/mo';
-}
+    document.getElementById('r-fleet').textContent = vehicles + ' vehicles';
+    document.getElementById('r-scans').textContent = totalScans.toLocaleString() + ' scans';
+    document.getElementById('r-scan-cost').textContent = fmt(scanCost * totalScans);
+    document.getElementById('r-downtime').textContent = fmt(downtime * totalScans);
+    document.getElementById('r-total-without').textContent = fmt(withoutZonar);
+    document.getElementById('r-zonar-cost').textContent = fmt(zonarAnnual) + '/yr';
+    document.getElementById('r-net-savings').textContent = fmt(Math.max(savings, 0));
+    document.getElementById('savings-big').textContent = fmt(Math.max(savings, 0));
+    document.getElementById('savings-sub').textContent = serviceType === 'addon' ? 'Add-on @ $3/asset/mo' : 'Standalone @ $25/asset/mo';
+  }
 
-vSlider.addEventListener('input', calc);
-scSlider.addEventListener('input', calc);
-dtSlider.addEventListener('input', calc);
+  vSlider.addEventListener('input', calc);
+  scSlider.addEventListener('input', calc);
+  dtSlider.addEventListener('input', calc);
 
-document.getElementById('scans-toggle').querySelectorAll('button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.getElementById('scans-toggle').querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    scansPerYear = parseInt(btn.dataset.val);
-    callout.classList.toggle('visible', scansPerYear === 4);
-    calc();
+  document.getElementById('scans-toggle').querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('scans-toggle').querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      scansPerYear = parseInt(btn.dataset.val);
+      callout.classList.toggle('visible', scansPerYear === 4);
+      calc();
+    });
   });
-});
 
-document.getElementById('type-toggle').querySelectorAll('button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.getElementById('type-toggle').querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    serviceType = btn.dataset.val;
-    calc();
+  document.getElementById('type-toggle').querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('type-toggle').querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      serviceType = btn.dataset.val;
+      calc();
+    });
   });
-});
 
-calc();
+  calc();
 </script>
+
+</body>
+</html>
